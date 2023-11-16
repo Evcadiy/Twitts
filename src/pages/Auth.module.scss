@@ -1,0 +1,49 @@
+$background-color: #f4f4f4;
+$login-bg: #fff;
+$input-border-color: #ccc;
+$button-bg: #673ab7;
+$button-bg-hover: #441398;
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form {
+  background-color: $login-bg;
+  padding: 70px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 500px;
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background-color: $button-bg;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $button-bg-hover;
+    }
+  }
+}
