@@ -1,16 +1,24 @@
-// RegisterPage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import styles from "./Auth.module.scss";
 import { setUser } from "../redux/userSlice";
+import useAuth from "../hooks/use-auth";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth, navigate]);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -18,6 +26,7 @@ const RegisterPage = () => {
 
   const registerHandler = (e) => {
     e.preventDefault();
+
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, pass)
       .then(({ user }) => {
@@ -28,15 +37,29 @@ const RegisterPage = () => {
             id: user.uid,
           })
         );
+
+        localStorage.setItem(
+          "authUser",
+          JSON.stringify({
+            email: user.email,
+            token: user.accessToken,
+            id: user.uid,
+          })
+        );
+
         navigate("/");
       })
-      .catch(console.error);
+
+      .catch((error) => {
+        console.error("Error:", error.message);
+        setError("Error: Invalid email or password");
+      });
   };
 
   return (
-    <>
-      <h1>Register</h1>
+    <div className={styles.container}>
       <form onSubmit={formHandler} className={styles.form}>
+        <h1>Register</h1>
         <input
           type="email"
           placeholder="Email Address"
@@ -55,8 +78,9 @@ const RegisterPage = () => {
         <p>
           Already have an account? <Link to="/login">Sign in</Link>
         </p>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
-    </>
+    </div>
   );
 };
 

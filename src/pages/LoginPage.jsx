@@ -1,4 +1,3 @@
-// LoginPage.jsx
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,6 +10,17 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("authUser");
+
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      dispatch(setUser(userData));
+      navigate("/");
+    }
+  }, [dispatch, navigate]);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -18,6 +28,7 @@ const LoginPage = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, pass)
       .then(({ user }) => {
@@ -28,15 +39,28 @@ const LoginPage = () => {
             id: user.uid,
           })
         );
+
+        localStorage.setItem(
+          "authUser",
+          JSON.stringify({
+            email: user.email,
+            token: user.accessToken,
+            id: user.uid,
+          })
+        );
+
         navigate("/");
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error:", error.message);
+        setError("Error: Invalid login or password");
+      });
   };
 
   return (
-    <>
-      <h1>Login</h1>
+    <div className={styles.container}>
       <form onSubmit={formHandler} className={styles.form}>
+        <h1>Login</h1>
         <input
           type="email"
           placeholder="Email Address"
@@ -55,8 +79,9 @@ const LoginPage = () => {
         <p>
           Or <Link to="/register">Register</Link>
         </p>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
-    </>
+    </div>
   );
 };
 
