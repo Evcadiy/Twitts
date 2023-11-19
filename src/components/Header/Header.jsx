@@ -7,7 +7,7 @@ import styles from "./Header.module.scss";
 
 import { removeUser } from "../../redux/userSlice";
 
-const Header = ({ removeBtn }) => {
+const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,8 +22,18 @@ const Header = ({ removeBtn }) => {
       <div className={styles.container}>
         <ul>
           <li>
-            <NavLink to={"/"}>Home</NavLink>
-            <NavLink to={"/add-post"}>Add Post</NavLink>
+            <NavLink
+              to={"/"}
+              className={({ isActive }) => (isActive ? styles.active : "")}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to={"/add-post"}
+              className={({ isActive }) => (isActive ? styles.active : "")}
+            >
+              Add Post
+            </NavLink>
           </li>
         </ul>
         <button className={styles.removeBtn} onClick={remove}>

@@ -15,6 +15,10 @@ $button-bg-hover: #441398;
 }
 
 .form {
+  @media (max-width: 768.9px) {
+    background-color: inherit;
+    box-shadow: none;
+  }
   background-color: $login-bg;
   padding: 40px 50px;
   border-radius: 5px;

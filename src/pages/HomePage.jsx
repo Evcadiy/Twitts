@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
+
+import styles from "./HomePage.module.scss";
+
 import Header from "../components/Header/Header";
+import PostsList from "../components/PostsList/PostsList";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -26,13 +30,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <div>
-        {isAuth ? (
-          <div>
-            <h1>Домашняя страница</h1>
-          </div>
-        ) : null}
-      </div>
+      <div className={styles.container}>{isAuth ? <PostsList /> : null}</div>
     </>
   );
 };
