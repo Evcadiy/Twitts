@@ -18,7 +18,7 @@ const AddPost = () => {
     <>
       <Header />
       <div className={styles.container}>
-        <h1>Enter text 🠫</h1>
+        <h1>Enter text</h1>
         <textarea
           value={postText}
           onChange={(e) => setPostText(e.target.value)}

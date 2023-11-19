@@ -15,8 +15,8 @@
   overflow-wrap: break-word;
   word-break: break-all;
   white-space: pre-line;
-  @media (max-width: 425.9px) {
-    max-width: 150px;
+  @media (max-width: 768.9px) {
+    max-width: 200px;
   }
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
