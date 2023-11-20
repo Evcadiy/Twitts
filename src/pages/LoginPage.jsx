@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import styles from "./Auth.module.scss";
-import { setUser, removeUser } from "../redux/userSlice";
+import { setUser } from "../redux/userSlice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -78,6 +78,9 @@ const LoginPage = () => {
         </button>
         <p>
           Or <Link to="/register">Register</Link>
+        </p>
+        <p>
+          Forgot password <Link to="/reset">Reset</Link>
         </p>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>

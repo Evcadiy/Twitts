@@ -7,7 +7,7 @@ import {
   update,
 } from "firebase/database";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -97,5 +97,15 @@ export const removePostFromDatabase = async (postId) => {
     }
   } catch (error) {
     console.error("Error removing post from Realtime Database:", error);
+  }
+};
+
+export const handleResetPassword = async (email) => {
+  try {
+    const auth = getAuth();
+    await sendPasswordResetEmail(auth, email);
+    console.log("Password reset email sent successfully. Check your email.");
+  } catch (error) {
+    console.error("Error sending password reset email:", error.message);
   }
 };

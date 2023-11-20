@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import AddPost from "./pages/AddPost";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/add-post" Component={AddPost} />
         <Route path="/login" Component={LoginPage} />
         <Route path="/register" Component={RegisterPage} />
+        <Route path="/reset" Component={ResetPasswordPage} />
       </Routes>
     </>
   );
