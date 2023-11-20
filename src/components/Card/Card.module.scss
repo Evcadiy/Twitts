@@ -9,14 +9,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   font-size: 24px;
-  width: 100%;
+  width: 150%;
   max-width: 500px;
   overflow-wrap: break-word;
   word-break: break-all;
   white-space: pre-line;
   @media (max-width: 768.9px) {
-    max-width: 200px;
+    width: 110%;
+    max-width: 260px;
+
+    font-size: 18px;
+  }
+  @media (max-width: 425.9px) {
+    width: 70%;
+    max-width: 150px;
   }
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
