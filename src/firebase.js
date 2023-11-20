@@ -1,6 +1,13 @@
-import { getDatabase, ref, push, onValue, remove } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue,
+  remove,
+  update,
+} from "firebase/database";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -54,6 +61,24 @@ export const getPostsFromDatabase = (callback) => {
   } catch (error) {
     console.error("Error getting posts from Realtime Database:", error);
     return [];
+  }
+};
+
+export const updatePostInDatabase = async (postId, postText) => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      const { uid } = user;
+      const postRef = ref(database, `posts/${uid}/${postId}`);
+      await update(postRef, { text: postText });
+      console.log("Post updated successfully.");
+    } else {
+      console.error("User not authenticated.");
+    }
+  } catch (error) {
+    console.error("Error updating post in Realtime Database:", error);
   }
 };
 
