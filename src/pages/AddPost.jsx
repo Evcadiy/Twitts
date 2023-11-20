@@ -10,6 +10,9 @@ const AddPost = () => {
   const navigate = useNavigate();
 
   const handleAddPost = () => {
+    if (postText === "") {
+      return;
+    }
     addPostToDatabase(postText);
     setPostText("");
     navigate("/");
