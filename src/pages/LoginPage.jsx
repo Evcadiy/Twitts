@@ -78,12 +78,15 @@ const LoginPage = () => {
         <button type="submit" onClick={loginHandler}>
           Отправить
         </button>
-        <p>
-          Or <Link to="/register">Register</Link>
-        </p>
-        <p>
-          Forgot password <Link to="/reset">Reset</Link>
-        </p>
+        <div className={styles.p}>
+          <p>
+            Or <Link to="/register">Register</Link>
+          </p>
+          <p>
+            <Link to="/reset">Forgot password</Link>
+          </p>
+        </div>
+
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>

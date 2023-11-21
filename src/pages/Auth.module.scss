@@ -37,6 +37,20 @@ $button-bg-hover: #441398;
     box-sizing: border-box;
   }
 
+  .p {
+    display: flex;
+    gap: 297px;
+    p {
+      @media (max-width: 600.9px) {
+        margin-bottom: -5px;
+      }
+    }
+    @media (max-width: 600.9px) {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
   button {
     width: 100%;
     background-color: $button-bg;
